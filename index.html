@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iammrabdbuilds | Smart PC Builder Pakistan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-text { background: linear-gradient(to right, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body class="bg-black text-gray-100 min-h-screen">
+
+    <nav class="p-6 border-b border-gray-800 flex justify-between items-center max-w-6xl mx-auto">
+        <h1 class="text-2xl font-black gradient-text italic">IAMMRABDBUILDS</h1>
+        <div class="text-xs text-gray-500 uppercase tracking-widest">Pakistan 2026 Edition</div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto p-6 pt-12">
+        
+        <div id="intro-screen" class="text-center space-y-6">
+            <h2 class="text-5xl font-bold">Build your dream PC in <span class="text-blue-500">60 seconds.</span></h2>
+            <p class="text-gray-400 text-lg">Smart logic designed for beginners and enthusiasts in Pakistan.</p>
+            <button onclick="startQuiz()" class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-full font-bold text-xl transition-all hover:scale-105">Start Guided Quiz</button>
+        </div>
+
+        <div id="quiz-container" class="hidden space-y-12 pb-20">
+            
+            <section class="space-y-4">
+                <h3 class="text-xl font-bold text-blue-400 uppercase tracking-wide">Step 1: What will you use this PC for?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <label class="glass p-4 rounded-xl flex items-center gap-3 cursor-pointer hover:border-blue-500 transition"><input type="checkbox" name="use" value="gaming_aaa"> AAA Games (GTA V, Cyberpunk)</label>
+                    <label class="glass p-4 rounded-xl flex items-center gap-3 cursor-pointer hover:border-blue-500 transition"><input type="checkbox" name="use" value="editing"> Video Editing / 3D Rendering</label>
+                    <label class="glass p-4 rounded-xl flex items-center gap-3 cursor-pointer hover:border-blue-500 transition"><input type="checkbox" name="use" value="work"> Coding / Office Work</label>
+                    <label class="glass p-4 rounded-xl flex items-center gap-3 cursor-pointer hover:border-blue-500 transition"><input type="checkbox" name="use" value="streaming"> Gaming + Streaming</label>
+                </div>
+            </section>
+
+            <section class="space-y-4">
+                <h3 class="text-xl font-bold text-blue-400 uppercase tracking-wide">Step 2: Platform Preference</h3>
+                <div class="flex gap-4">
+                    <label class="flex-1 glass p-4 rounded-xl text-center cursor-pointer hover:border-blue-500"><input type="radio" name="platform" value="AMD" checked> AMD</label>
+                    <label class="flex-1 glass p-4 rounded-xl text-center cursor-pointer hover:border-blue-500"><input type="radio" name="platform" value="Intel"> Intel</label>
+                </div>
+            </section>
+
+            <section class="space-y-4">
+                <h3 class="text-xl font-bold text-blue-400 uppercase tracking-wide">Step 3: Budget (PKR)</h3>
+                <input type="number" id="budgetInput" placeholder="Enter amount (e.g., 350000)" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl text-xl focus:border-blue-500 outline-none">
+            </section>
+
+            <button onclick="calculateBuild()" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 p-5 rounded-xl font-black text-xl hover:opacity-90 transition">GENERATE BUILD</button>
+        </div>
+
+        <div id="result-screen" class="hidden space-y-8 animate-fade-in">
+            <div class="glass border-2 border-blue-500 p-8 rounded-3xl">
+                <h2 class="text-3xl font-bold mb-6">Recommended Build for You:</h2>
+                <div id="build-output" class="space-y-4 text-lg"></div>
+            </div>
+            <button onclick="location.reload()" class="text-gray-500 underline w-full">Start Over</button>
+        </div>
+
+    </main>
+
+    <script>
+        function startQuiz() {
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+        }
+
+        function calculateBuild() {
+            const budget = parseInt(document.getElementById('budgetInput').value);
+            const platform = document.querySelector('input[name="platform"]:checked').value;
+            const output = document.getElementById('build-output');
+            
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+
+            let cpu, gpu, ram, tier;
+
+            if (budget >= 600000) {
+                tier = "🔴 EXTREME";
+                cpu = platform === "AMD" ? "Ryzen 9 7900X / 7950X3D" : "Intel i9-14900K";
+                gpu = "RTX 4090 (24GB VRAM)";
+                ram = "64GB DDR5 6400MHz";
+            } else if (budget >= 350000) {
+                tier = "🔵 HIGH-END (Best Value)";
+                cpu = platform === "AMD" ? "Ryzen 7 7800X3D ⭐" : "Intel i7-14700K";
+                gpu = "RTX 5070 Ti (Next-Gen)";
+                ram = "32GB DDR5 6000MHz";
+            } else {
+                tier = "🟢 MID-RANGE";
+                cpu = platform === "AMD" ? "Ryzen 5 7600X" : "Intel i5-14600K";
+                gpu = "RTX 4060 Ti / RTX 5060";
+                ram = "16GB - 32GB DDR5";
+            }
+
+            output.innerHTML = `
+                <div class="text-blue-400 font-bold text-2xl">${tier}</div>
+                <div class="grid gap-4 mt-4">
+                    <div class="p-3 bg-white/5 rounded"><strong>Processor:</strong> ${cpu}</div>
+                    <div class="p-3 bg-white/5 rounded"><strong>Graphics Card:</strong> ${gpu}</div>
+                    <div class="p-3 bg-white/5 rounded"><strong>Memory:</strong> ${ram}</div>
+                    <div class="p-3 bg-white/5 rounded italic text-sm text-gray-400">Prices are based on Karachi/Lahore market estimates for 2026.</div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

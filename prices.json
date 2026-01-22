@@ -1,0 +1,37 @@
+{
+  "last_updated": "January 2026",
+  "currency": "PKR",
+  "cpus": {
+    "r5_7600x": 54000,
+    "r7_7800x3d": 115000,
+    "r9_7950x3d": 165000,
+    "i7_14700k": 112000,
+    "i9_14900k": 175000
+  },
+  "gpus": {
+    "rtx_3060ti": 88000,
+    "rtx_4070_super": 189000,
+    "rtx_5070ti": 318000,
+    "rtx_4090": 680000
+  },
+  "ram": {
+    "ddr5_16gb": 22000,
+    "ddr5_32gb": 43000,
+    "ddr5_64gb": 88000
+  },
+  "storage": {
+    "ssd_512gb": 12000,
+    "ssd_1tb": 27000,
+    "ssd_2tb": 52000
+  },
+  "cases": {
+    "panoramic_mid": 18000,
+    "mesh_airflow": 14000,
+    "compact_matx": 12000,
+    "hyte_y70_infinite": 138000
+  },
+  "upgrades": {
+    "rgb_fans_daisy": 15000,
+    "aio_cooler_360": 28000
+  }
+}

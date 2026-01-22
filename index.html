@@ -15,55 +15,33 @@
 
     <nav class="p-6 border-b border-gray-800 flex justify-between items-center max-w-6xl mx-auto">
         <h1 class="text-2xl font-black gradient-text">IAMMRABDBUILDS</h1>
-        <div class="text-xs text-gray-500 uppercase">Pakistan 2026 Logic</div>
+        <div class="space-x-4">
+            <a href="index.html" class="text-blue-400">Builder</a>
+            <a href="prebuilts.html" class="hover:text-blue-400">Pre-builts</a>
+            <a href="learn.html" class="hover:text-blue-400">Learn</a>
+        </div>
     </nav>
 
     <main class="max-w-3xl mx-auto p-6 pt-10">
-        
         <div id="quiz-flow">
             <div id="step-1" class="quiz-step">
-                <h2 class="text-3xl font-bold mb-2">Step 1: What will you use this PC for?</h2>
-                <p class="text-gray-400 mb-6 italic">You can select more than one</p>
-                
+                <h2 class="text-3xl font-bold mb-6">Step 1: What will you use this PC for?</h2>
                 <div class="space-y-6">
-                    <div>
-                        <h4 class="text-blue-400 font-bold mb-3">🎮 Gaming (GPU-heavy)</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <label class="glass p-4 rounded-xl cursor-pointer flex items-center"><input type="checkbox" class="mr-3 usage" value="casual"> Casual (Valorant, Fortnite)</label>
-                            <label class="glass p-4 rounded-xl cursor-pointer flex items-center"><input type="checkbox" class="mr-3 usage" value="aaa"> AAA (GTA V, Cyberpunk)</label>
-                            <label class="glass p-4 rounded-xl cursor-pointer flex items-center"><input type="checkbox" class="mr-3 usage" value="competitive"> Competitive / High-FPS</label>
-                            <label class="glass p-4 rounded-xl cursor-pointer flex items-center"><input type="checkbox" class="mr-3 usage" value="4k"> 1440p or 4K Gaming</label>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="text-purple-400 font-bold mb-3">🎥 Content Creation / 3D</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <label class="glass p-4 rounded-xl cursor-pointer flex items-center"><input type="checkbox" class="mr-3 usage" value="video"> Video Editing</label>
-                            <label class="glass p-4 rounded-xl cursor-pointer flex items-center"><input type="checkbox" class="mr-3 usage" value="3d"> 3D Rendering / VFX</label>
-                        </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <label class="glass p-4 rounded-xl cursor-pointer flex items-center"><input type="checkbox" class="mr-3 usage" value="casual"> Casual (Valorant, Fortnite)</label>
+                        <label class="glass p-4 rounded-xl cursor-pointer flex items-center"><input type="checkbox" class="mr-3 usage" value="aaa"> AAA (GTA V, Cyberpunk)</label>
+                        <label class="glass p-4 rounded-xl cursor-pointer flex items-center"><input type="checkbox" class="mr-3 usage" value="video"> Video Editing</label>
+                        <label class="glass p-4 rounded-xl cursor-pointer flex items-center"><input type="checkbox" class="mr-3 usage" value="3d"> 3D Rendering / VFX</label>
                     </div>
                 </div>
                 <button onclick="nextStep(2)" class="mt-8 w-full bg-blue-600 p-4 rounded-xl font-bold">Next Step →</button>
             </div>
 
             <div id="step-2" class="quiz-step hidden">
-                <h2 class="text-3xl font-bold mb-2">Step 2: Which parts matter most?</h2>
-                <p class="text-gray-400 mb-6">This helps us balance your build correctly</p>
-                
+                <h2 class="text-3xl font-bold mb-6">Step 2: Which parts matter most?</h2>
                 <div class="space-y-4">
                     <h4 class="text-blue-400 font-bold">🧠 CPU Priority</h4>
-                    <select id="cpu-pref" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl">
-                        <option value="gaming">Maximum gaming performance</option>
-                        <option value="work">Faster rendering / work tasks</option>
-                        <option value="balanced">Balanced gaming + work</option>
-                    </select>
-                    
-                    <h4 class="text-blue-400 font-bold">🎮 GPU Priority</h4>
-                    <select id="gpu-pref" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl">
-                        <option value="fps">High FPS in games</option>
-                        <option value="render">3D rendering / GPU compute</option>
-                        <option value="none">I don't need a powerful GPU</option>
-                    </select>
+                    <select id="cpu-pref" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl"><option value="gaming">Maximum gaming performance</option><option value="work">Faster rendering / work tasks</option></select>
                 </div>
                 <button onclick="nextStep(3)" class="mt-8 w-full bg-blue-600 p-4 rounded-xl font-bold">Next Step →</button>
             </div>
@@ -71,49 +49,53 @@
             <div id="step-3" class="quiz-step hidden">
                 <h2 class="text-3xl font-bold mb-6">Step 3: Your Experience Level</h2>
                 <div class="grid grid-cols-1 gap-4">
-                    <label class="glass p-6 rounded-2xl cursor-pointer">
-                        <input type="radio" name="exp" value="beginner" checked class="mr-2"> 
-                        <span class="text-xl font-bold text-green-400">🟢 Beginner</span>
-                        <p class="text-sm text-gray-400 mt-2">I want simple recommendations and value for money.</p>
-                    </label>
-                    <label class="glass p-6 rounded-2xl cursor-pointer">
-                        <input type="radio" name="exp" value="pro" class="mr-2"> 
-                        <span class="text-xl font-bold text-blue-400">🔵 Intermediate / Advanced</span>
-                        <p class="text-sm text-gray-400 mt-2">I understand parts and want customization options.</p>
-                    </label>
+                    <label class="glass p-6 rounded-2xl cursor-pointer"><input type="radio" name="exp" value="beginner" checked> <span class="text-green-400 font-bold">🟢 Beginner</span></label>
+                    <label class="glass p-6 rounded-2xl cursor-pointer"><input type="radio" name="exp" value="pro"> <span class="text-blue-400 font-bold">🔵 Advanced</span></label>
                 </div>
                 <button onclick="nextStep(4)" class="mt-8 w-full bg-blue-600 p-4 rounded-xl font-bold">Next Step →</button>
             </div>
 
             <div id="step-4" class="quiz-step hidden">
-                <h2 class="text-3xl font-bold mb-6">Final Details</h2>
-                <div class="space-y-6">
-                    <div>
-                        <label class="block mb-2 font-bold">Platform Preference</label>
-                        <select id="platform" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl">
-                            <option value="No preference">No preference (We choose best value)</option>
-                            <option value="AMD">AMD (Best gaming & future upgrades)</option>
-                            <option value="Intel">Intel (Strong work & productivity)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block mb-2 font-bold">Budget (PKR)</label>
-                        <input type="number" id="budget" placeholder="e.g. 300000" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl">
-                    </div>
+                <h2 class="text-3xl font-bold mb-6">Step 4: Platform Preference</h2>
+                <select id="platform" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl">
+                    <option value="AMD">AMD (Best gaming & future upgrades)</option>
+                    <option value="Intel">Intel (Strong work & productivity)</option>
+                </select>
+                <button onclick="nextStep(5)" class="mt-8 w-full bg-blue-600 p-4 rounded-xl font-bold">Next Step →</button>
+            </div>
+
+            <div id="step-5" class="quiz-step hidden">
+                <h2 class="text-3xl font-bold mb-6">Step 5: Your Budget (PKR)</h2>
+                <input type="number" id="budget" placeholder="e.g. 350000" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl text-xl">
+                <button onclick="nextStep(6)" class="mt-8 w-full bg-blue-600 p-4 rounded-xl font-bold">Next: Choose Case →</button>
+            </div>
+
+            <div id="step-6" class="quiz-step hidden">
+                <h2 class="text-3xl font-bold mb-6">Step 6: Choose Your Case Style</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <label class="glass p-4 rounded-xl cursor-pointer"><input type="radio" name="case" value="panoramic" checked> Panoramic Aquarium</label>
+                    <label class="glass p-4 rounded-xl cursor-pointer"><input type="radio" name="case" value="mesh"> High-Airflow Mesh</label>
+                    <label class="glass p-4 rounded-xl cursor-pointer border-red-900/50"><input type="radio" name="case" value="hyte"> <span class="text-red-400">Hyte Y70 Touch (~138k)</span></label>
                 </div>
-                <button onclick="showResult()" class="mt-8 w-full bg-gradient-to-r from-blue-600 to-purple-600 p-5 rounded-xl font-black text-xl">VIEW MY BUILD</button>
+                <button onclick="nextStep(7)" class="mt-8 w-full bg-blue-600 p-4 rounded-xl font-bold">Next: Aesthetics →</button>
+            </div>
+
+            <div id="step-7" class="quiz-step hidden">
+                <h2 class="text-3xl font-bold mb-6">Step 7: Lighting (RGB)</h2>
+                <div class="grid grid-cols-1 gap-4">
+                    <label class="glass p-6 rounded-2xl cursor-pointer"><input type="radio" name="rgb" value="full" checked> Full RGB (Daisy-Chained)</label>
+                    <label class="glass p-6 rounded-2xl cursor-pointer"><input type="radio" name="rgb" value="stealth"> Stealth Blackout</label>
+                </div>
+                <button onclick="showResult()" class="mt-8 w-full bg-gradient-to-r from-blue-600 to-purple-600 p-5 rounded-xl font-black text-xl">GENERATE FINAL BUILD</button>
             </div>
         </div>
 
         <div id="result-screen" class="hidden space-y-6">
             <div class="glass border-2 border-blue-500 p-8 rounded-3xl">
-                <h2 class="text-4xl font-black mb-2">The Perfect Build</h2>
-                <p id="tier-name" class="text-blue-400 font-bold tracking-widest uppercase mb-6"></p>
-                
+                <h2 class="text-4xl font-black mb-6">The Perfect Build</h2>
                 <div id="build-list" class="space-y-4"></div>
-                
                 <div class="mt-8 p-4 bg-blue-900/20 border border-blue-800 rounded-xl">
-                    <h4 class="font-bold text-blue-300">💡 Why this build?</h4>
+                    <h4 class="font-bold text-blue-300">💡 Builder's Note:</h4>
                     <p id="logic-note" class="text-sm text-gray-300 mt-1"></p>
                 </div>
             </div>
@@ -129,44 +111,35 @@
 
         function showResult() {
             const budget = parseInt(document.getElementById('budget').value) || 0;
+            const caseType = document.querySelector('input[name="case"]:checked').value;
+            const rgbType = document.querySelector('input[name="rgb"]:checked').value;
             const platform = document.getElementById('platform').value;
-            const cpuPref = document.getElementById('cpu-pref').value;
-            const exp = document.querySelector('input[name="exp"]:checked').value;
-            
+
             document.getElementById('quiz-flow').classList.add('hidden');
             document.getElementById('result-screen').classList.remove('hidden');
 
-            let cpu, gpu, ram, tier, note;
-
-            // Logic matching your document
-            if (budget >= 650000) {
-                tier = "🔴 Extreme Performance";
-                cpu = platform === "Intel" ? "Intel i9-14900K" : "Ryzen 9 7950X3D";
-                gpu = "RTX 4090 (~650k PKR)";
-                ram = "64GB DDR5 Professional Grade";
-                note = "Only for extreme workloads or unlimited gaming budgets.";
-            } else if (budget >= 350000) {
-                tier = "🔵 High-End (Recommended)";
-                cpu = (cpuPref === 'work') ? "Ryzen 9 7900X" : "Ryzen 7 7800X3D ⭐";
-                gpu = "RTX 5070 Ti (Best 2026 Value)";
-                ram = "32GB DDR5 6000MHz";
-                note = "Gaming focus uses X3D CPUs. Work focus uses more cores.";
+            let cpu, gpu, note;
+            
+            if (budget >= 600000) {
+                cpu = platform === "AMD" ? "Ryzen 9 7950X3D" : "Intel i9-14900K";
+                gpu = "RTX 4090";
+            } else if (budget >= 300000) {
+                cpu = "Ryzen 7 7800X3D";
+                gpu = "RTX 5070 Ti";
             } else {
-                tier = "🟢 Mid-Range Value";
-                cpu = "Ryzen 5 7600 / 7600X";
-                gpu = "RTX 4060-class GPU";
-                ram = "16GB - 32GB DDR5";
-                note = "Best for 1080p/1440p gaming. Avoid AM4 (Ryzen 5000) in 2026.";
+                cpu = "Ryzen 5 7600X";
+                gpu = "RTX 3060 Ti / 4060";
             }
 
-            document.getElementById('tier-name').innerText = tier;
-            document.getElementById('logic-note').innerText = note;
+            note = (rgbType === "full") ? "Daisy-chained fans selected for clean wiring." : "Stealth build focus.";
+            if (caseType === 'hyte') note += " Warning: Hyte Y70 takes ~138k of your budget!";
+
             document.getElementById('build-list').innerHTML = `
-                <div class="p-4 bg-white/5 rounded-xl"><strong>Processor:</strong> ${cpu}</div>
-                <div class="p-4 bg-white/5 rounded-xl"><strong>Graphics Card:</strong> ${gpu}</div>
-                <div class="p-4 bg-white/5 rounded-xl"><strong>Memory:</strong> ${ram}</div>
-                <div class="p-4 bg-white/5 rounded-xl"><strong>Experience Level:</strong> ${exp.toUpperCase()} mode applied</div>
+                <div class="p-4 bg-white/5 rounded-xl"><strong>CPU:</strong> ${cpu}</div>
+                <div class="p-4 bg-white/5 rounded-xl"><strong>GPU:</strong> ${gpu}</div>
+                <div class="p-4 bg-white/5 rounded-xl"><strong>Case:</strong> ${caseType.toUpperCase()}</div>
             `;
+            document.getElementById('logic-note').innerHTML = note;
         }
     </script>
 </body>

@@ -2,144 +2,287 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iammrabdbuilds | Smart PC Builder Pakistan</title>
+    <title>iammrabdbuilds | Smart PC Builder</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
-        .glass:hover { border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
-        .gradient-text { background: linear-gradient(to right, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .active-path { border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+        select, input, textarea { background-color: #111 !important; color: white !important; border: 1px solid #333 !important; }
+        .hidden { display: none; }
     </style>
 </head>
-<body class="bg-black text-gray-100 min-h-screen font-sans">
+<body class="bg-black text-white min-h-screen font-sans">
 
     <nav class="p-6 border-b border-gray-800 flex justify-between items-center max-w-6xl mx-auto">
-        <h1 class="text-2xl font-black gradient-text">IAMMRABDBUILDS</h1>
+        <h1 class="text-2xl font-black text-blue-500">IAMMRABDBUILDS</h1>
         <div class="space-x-4">
-            <a href="index.html" class="text-blue-400">Builder</a>
             <a href="prebuilts.html" class="hover:text-blue-400">Pre-builts</a>
             <a href="learn.html" class="hover:text-blue-400">Learn</a>
         </div>
     </nav>
 
     <main class="max-w-3xl mx-auto p-6 pt-10">
-        <div id="quiz-flow">
-            <div id="step-1" class="quiz-step">
-                <h2 class="text-3xl font-bold mb-6">Step 1: What will you use this PC for?</h2>
-                <div class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <label class="glass p-4 rounded-xl cursor-pointer flex items-center"><input type="checkbox" class="mr-3 usage" value="casual"> Casual (Valorant, Fortnite)</label>
-                        <label class="glass p-4 rounded-xl cursor-pointer flex items-center"><input type="checkbox" class="mr-3 usage" value="aaa"> AAA (GTA V, Cyberpunk)</label>
-                        <label class="glass p-4 rounded-xl cursor-pointer flex items-center"><input type="checkbox" class="mr-3 usage" value="video"> Video Editing</label>
-                        <label class="glass p-4 rounded-xl cursor-pointer flex items-center"><input type="checkbox" class="mr-3 usage" value="3d"> 3D Rendering / VFX</label>
+        <form action="https://formspree.io/f/YOUR_ID" method="POST" id="main-form">
+            
+            <div id="step-0" class="space-y-6 text-center">
+                <h2 class="text-4xl font-bold mb-4">Welcome to the Builder</h2>
+                <p class="text-gray-400">Select your path to begin.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div onclick="startPath('beginner')" class="glass p-10 rounded-2xl cursor-pointer hover:border-green-500 transition">
+                        <h3 class="text-2xl font-bold text-green-400">🟢 Beginner</h3>
+                        <p class="text-sm text-gray-500">I have little to no understanding of parts.</p>
+                    </div>
+                    <div onclick="startPath('advanced')" class="glass p-10 rounded-2xl cursor-pointer hover:border-blue-500 transition">
+                        <h3 class="text-2xl font-bold text-blue-400">🔵 Advanced</h3>
+                        <p class="text-sm text-gray-500">I know exactly what I want.</p>
                     </div>
                 </div>
-                <button onclick="nextStep(2)" class="mt-8 w-full bg-blue-600 p-4 rounded-xl font-bold">Next Step →</button>
+                <input type="hidden" name="Mode" id="mode-input">
             </div>
 
-            <div id="step-2" class="quiz-step hidden">
-                <h2 class="text-3xl font-bold mb-6">Step 2: Which parts matter most?</h2>
-                <div class="space-y-4">
-                    <h4 class="text-blue-400 font-bold">🧠 CPU Priority</h4>
-                    <select id="cpu-pref" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl"><option value="gaming">Maximum gaming performance</option><option value="work">Faster rendering / work tasks</option></select>
+            <div id="quiz-container" class="hidden space-y-8">
+                
+                <div class="glass p-6 rounded-2xl">
+                    <label class="block text-xl font-bold mb-2">1. What is your budget?</label>
+                    <input type="number" name="Budget" placeholder="Amount in PKR" class="w-full p-4 rounded-xl">
                 </div>
-                <button onclick="nextStep(3)" class="mt-8 w-full bg-blue-600 p-4 rounded-xl font-bold">Next Step →</button>
-            </div>
 
-            <div id="step-3" class="quiz-step hidden">
-                <h2 class="text-3xl font-bold mb-6">Step 3: Your Experience Level</h2>
-                <div class="grid grid-cols-1 gap-4">
-                    <label class="glass p-6 rounded-2xl cursor-pointer"><input type="radio" name="exp" value="beginner" checked> <span class="text-green-400 font-bold">🟢 Beginner</span></label>
-                    <label class="glass p-6 rounded-2xl cursor-pointer"><input type="radio" name="exp" value="pro"> <span class="text-blue-400 font-bold">🔵 Advanced</span></label>
+                <div class="glass p-6 rounded-2xl">
+                    <label class="block text-xl font-bold mb-2">2. Experience Level</label>
+                    <select name="Experience_Level" class="w-full p-4 rounded-xl" id="exp-select">
+                        <option value="Beginner">Beginner</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
                 </div>
-                <button onclick="nextStep(4)" class="mt-8 w-full bg-blue-600 p-4 rounded-xl font-bold">Next Step →</button>
-            </div>
 
-            <div id="step-4" class="quiz-step hidden">
-                <h2 class="text-3xl font-bold mb-6">Step 4: Platform Preference</h2>
-                <select id="platform" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl">
-                    <option value="AMD">AMD (Best gaming & future upgrades)</option>
-                    <option value="Intel">Intel (Strong work & productivity)</option>
-                </select>
-                <button onclick="nextStep(5)" class="mt-8 w-full bg-blue-600 p-4 rounded-xl font-bold">Next Step →</button>
-            </div>
-
-            <div id="step-5" class="quiz-step hidden">
-                <h2 class="text-3xl font-bold mb-6">Step 5: Your Budget (PKR)</h2>
-                <input type="number" id="budget" placeholder="e.g. 350000" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl text-xl">
-                <button onclick="nextStep(6)" class="mt-8 w-full bg-blue-600 p-4 rounded-xl font-bold">Next: Choose Case →</button>
-            </div>
-
-            <div id="step-6" class="quiz-step hidden">
-                <h2 class="text-3xl font-bold mb-6">Step 6: Choose Your Case Style</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <label class="glass p-4 rounded-xl cursor-pointer"><input type="radio" name="case" value="panoramic" checked> Panoramic Aquarium</label>
-                    <label class="glass p-4 rounded-xl cursor-pointer"><input type="radio" name="case" value="mesh"> High-Airflow Mesh</label>
-                    <label class="glass p-4 rounded-xl cursor-pointer border-red-900/50"><input type="radio" name="case" value="hyte"> <span class="text-red-400">Hyte Y70 Touch (~138k)</span></label>
+                <div class="glass p-6 rounded-2xl">
+                    <label class="block text-xl font-bold mb-2">3. What will you use it for?</label>
+                    <div id="use-beginner" class="hidden grid grid-cols-2 gap-4">
+                        <label class="glass p-4 rounded cursor-pointer"><input type="checkbox" name="Use" value="Casual Gaming"> Casual (Roblox, Minecraft, Valo)</label>
+                        <label class="glass p-4 rounded cursor-pointer"><input type="checkbox" name="Use" value="AAA Gaming"> AAA Games (Cyberpunk, GTA VI)</label>
+                        <label class="glass p-4 rounded cursor-pointer"><input type="checkbox" name="Use" value="Streaming"> Streaming + Gaming</label>
+                        <label class="glass p-4 rounded cursor-pointer"><input type="checkbox" name="Use" value="3D Work"> 3D Rendering / Work</label>
+                    </div>
+                    <div id="use-advanced" class="hidden">
+                         <input type="text" name="Use_Advanced" placeholder="Detailed description (e.g. 4K Video Editing, AI Training)" class="w-full p-4 rounded-xl">
+                    </div>
                 </div>
-                <button onclick="nextStep(7)" class="mt-8 w-full bg-blue-600 p-4 rounded-xl font-bold">Next: Aesthetics →</button>
-            </div>
 
-            <div id="step-7" class="quiz-step hidden">
-                <h2 class="text-3xl font-bold mb-6">Step 7: Lighting (RGB)</h2>
-                <div class="grid grid-cols-1 gap-4">
-                    <label class="glass p-6 rounded-2xl cursor-pointer"><input type="radio" name="rgb" value="full" checked> Full RGB (Daisy-Chained)</label>
-                    <label class="glass p-6 rounded-2xl cursor-pointer"><input type="radio" name="rgb" value="stealth"> Stealth Blackout</label>
+                <div class="glass p-6 rounded-2xl">
+                    <label class="block text-xl font-bold mb-2">4. RGB or No RGB?</label>
+                    <div class="flex gap-4">
+                        <label class="glass p-4 flex-1 cursor-pointer"><input type="radio" name="RGB" value="Yes"> Yes (Lights)</label>
+                        <label class="glass p-4 flex-1 cursor-pointer"><input type="radio" name="RGB" value="No"> No (Stealth)</label>
+                    </div>
                 </div>
-                <button onclick="showResult()" class="mt-8 w-full bg-gradient-to-r from-blue-600 to-purple-600 p-5 rounded-xl font-black text-xl">GENERATE FINAL BUILD</button>
-            </div>
-        </div>
 
-        <div id="result-screen" class="hidden space-y-6">
-            <div class="glass border-2 border-blue-500 p-8 rounded-3xl">
-                <h2 class="text-4xl font-black mb-6">The Perfect Build</h2>
-                <div id="build-list" class="space-y-4"></div>
-                <div class="mt-8 p-4 bg-blue-900/20 border border-blue-800 rounded-xl">
-                    <h4 class="font-bold text-blue-300">💡 Builder's Note:</h4>
-                    <p id="logic-note" class="text-sm text-gray-300 mt-1"></p>
+                <div class="glass p-6 rounded-2xl">
+                    <label class="block text-xl font-bold mb-2">5. Platform Preference for CPU?</label>
+                    <select name="CPU_Platform" class="w-full p-4 rounded-xl" onchange="filterCPUs()">
+                        <option value="">Select Platform</option>
+                        <option value="Intel">Intel</option>
+                        <option value="AMD">AMD</option>
+                    </select>
+                </div>
+
+                <div class="glass p-6 rounded-2xl">
+                    <label class="block text-xl font-bold mb-2">6. Which CPU do you want?</label>
+                    <select name="CPU_Choice" id="cpu-list" class="w-full p-4 rounded-xl">
+                        <option value="">Select Platform First</option>
+                    </select>
+                    <button type="button" id="cpu-idk" class="hidden mt-2 text-sm text-blue-400 underline" onclick="setIDK('cpu-list')">I don't know, choose for me</button>
+                </div>
+
+                <div class="glass p-6 rounded-2xl">
+                    <label class="block text-xl font-bold mb-2">7. Platform Preference for GPU?</label>
+                    <select name="GPU_Platform" id="gpu-platform" class="w-full p-4 rounded-xl" onchange="showGPUSeries()">
+                        <option value="">Select Platform</option>
+                        <option value="NVIDIA">NVIDIA</option>
+                        <option value="AMD">AMD</option>
+                    </select>
+                </div>
+
+                <div class="glass p-6 rounded-2xl">
+                    <label class="block text-xl font-bold mb-2">8. Which GPU do you want?</label>
+                    
+                    <div id="nvidia-series" class="hidden space-y-4">
+                        <select name="GPU_Choice_20" class="w-full p-3 rounded-lg gpu-select" onchange="clearOthers(this)"><option value="">Select 20-Series</option></select>
+                        <select name="GPU_Choice_30" class="w-full p-3 rounded-lg gpu-select" onchange="clearOthers(this)"><option value="">Select 30-Series</option></select>
+                        <select name="GPU_Choice_40" class="w-full p-3 rounded-lg gpu-select" onchange="clearOthers(this)"><option value="">Select 40-Series</option></select>
+                        <select name="GPU_Choice_50" class="w-full p-3 rounded-lg gpu-select" onchange="clearOthers(this)"><option value="">Select 50-Series</option></select>
+                    </div>
+
+                    <div id="amd-series" class="hidden space-y-4">
+                        <select name="GPU_Choice_6000" class="w-full p-3 rounded-lg gpu-select" onchange="clearOthers(this)"><option value="">Select 6000-Series</option></select>
+                        <select name="GPU_Choice_7000" class="w-full p-3 rounded-lg gpu-select" onchange="clearOthers(this)"><option value="">Select 7000-Series</option></select>
+                        <select name="GPU_Choice_8000" class="w-full p-3 rounded-lg gpu-select" onchange="clearOthers(this)"><option value="">Select 8000-Series</option></select>
+                        <select name="GPU_Choice_9000" class="w-full p-3 rounded-lg gpu-select" onchange="clearOthers(this)"><option value="">Select 9000-Series</option></select>
+                    </div>
+
+                    <button type="button" id="gpu-idk" class="hidden mt-2 text-sm text-blue-400 underline" onclick="setIDK('gpu-platform')">I don't know, choose for me</button>
+                </div>
+
+                <div class="glass p-6 rounded-2xl">
+                    <label class="block text-xl font-bold mb-2">9. How much RAM?</label>
+                    <select name="RAM" id="ram-select" class="w-full p-4 rounded-xl">
+                        <option value="16GB">16GB</option>
+                        <option value="32GB">32GB</option>
+                        <option value="64GB">64GB</option>
+                    </select>
+                    <button type="button" id="ram-idk" class="hidden mt-2 text-sm text-blue-400 underline" onclick="setIDK('ram-select')">I don't know</button>
+                </div>
+
+                <div class="glass p-6 rounded-2xl">
+                    <label class="block text-xl font-bold mb-2">10. Storage?</label>
+                    <select name="Storage" class="w-full p-4 rounded-xl">
+                        <option value="256GB">256GB (Minimum)</option>
+                        <option value="512GB">512GB</option>
+                        <option value="1TB">1TB (Recommended)</option>
+                        <option value="2TB">2TB</option>
+                    </select>
+                </div>
+
+                <div class="glass p-6 rounded-2xl">
+                    <label class="block text-xl font-bold mb-4">11. Case Preference</label>
+                    <p class="text-sm text-gray-400 mb-4">View types below, then write the SPECIFIC NAME you want.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="text-center">
+                            
+                            <img src="https://via.placeholder.com/150?text=Hyte+Y70" class="rounded mb-2 mx-auto">
+                            <p class="text-xs">Hyte Y70 Touch Infinite</p>
+                        </div>
+                        <div class="text-center">
+                            
+                            <img src="https://via.placeholder.com/150?text=Panoramic" class="rounded mb-2 mx-auto">
+                            <p class="text-xs">Panoramic / Fish Tank</p>
+                        </div>
+                        <div class="text-center">
+                            
+                            <img src="https://via.placeholder.com/150?text=Mesh" class="rounded mb-2 mx-auto">
+                            <p class="text-xs">Mesh Airflow</p>
+                        </div>
+                    </div>
+
+                    <label class="block text-sm font-bold text-blue-400 mb-2">Write Specific Case Name Here:</label>
+                    <input type="text" name="Specific_Case" placeholder="e.g. Lian Li O11 Vision or 'Any Panoramic'" required class="w-full p-4 rounded-xl">
+                </div>
+
+                <div class="glass p-6 rounded-2xl bg-blue-900/10">
+                    <h3 class="text-xl font-bold mb-4">Contact Info</h3>
+                    <input type="email" name="Email" placeholder="Your Email" required class="w-full p-4 rounded-xl mb-4">
+                    <input type="tel" name="Phone" placeholder="WhatsApp Number" required class="w-full p-4 rounded-xl">
+                    <button type="submit" class="mt-6 w-full bg-blue-600 p-5 rounded-xl font-black text-xl hover:bg-blue-700">SUBMIT ORDER</button>
                 </div>
             </div>
-            <button onclick="location.reload()" class="w-full text-gray-500 underline">Start New Quiz</button>
-        </div>
+        </form>
     </main>
 
     <script>
-        function nextStep(step) {
-            document.querySelectorAll('.quiz-step').forEach(el => el.classList.add('hidden'));
-            document.getElementById('step-' + step).classList.remove('hidden');
+        let currentMode = '';
+
+        // Load Prices from JSON
+        let pcData = {};
+        fetch('prices.json').then(r => r.json()).then(data => {
+            pcData = data;
+            populateGPUs();
+        });
+
+        function startPath(mode) {
+            currentMode = mode;
+            document.getElementById('step-0').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('mode-input').value = mode;
+            
+            // Auto-set Question 2
+            document.getElementById('exp-select').value = (mode === 'beginner') ? 'Beginner' : 'Advanced';
+
+            // Show/Hide Elements based on mode
+            if (mode === 'beginner') {
+                document.getElementById('use-beginner').classList.remove('hidden');
+                document.getElementById('cpu-idk').classList.remove('hidden');
+                document.getElementById('gpu-idk').classList.remove('hidden');
+                document.getElementById('ram-idk').classList.remove('hidden');
+            } else {
+                document.getElementById('use-advanced').classList.remove('hidden');
+            }
         }
 
-        function showResult() {
-            const budget = parseInt(document.getElementById('budget').value) || 0;
-            const caseType = document.querySelector('input[name="case"]:checked').value;
-            const rgbType = document.querySelector('input[name="rgb"]:checked').value;
-            const platform = document.getElementById('platform').value;
+        function filterCPUs() {
+            const platform = document.querySelector('select[name="CPU_Platform"]').value;
+            const list = document.getElementById('cpu-list');
+            list.innerHTML = ""; // Clear list
 
-            document.getElementById('quiz-flow').classList.add('hidden');
-            document.getElementById('result-screen').classList.remove('hidden');
-
-            let cpu, gpu, note;
-            
-            if (budget >= 600000) {
-                cpu = platform === "AMD" ? "Ryzen 9 7950X3D" : "Intel i9-14900K";
-                gpu = "RTX 4090";
-            } else if (budget >= 300000) {
-                cpu = "Ryzen 7 7800X3D";
-                gpu = "RTX 5070 Ti";
-            } else {
-                cpu = "Ryzen 5 7600X";
-                gpu = "RTX 3060 Ti / 4060";
+            let options = [];
+            if (platform === 'Intel') {
+                options = ["i3-12100F", "i5-12400F", "i5-13600K", "i7-14700K", "i9-14900K", "Core Ultra 7 (15th Gen)", "Core Ultra 9 (15th Gen)"];
+            } else if (platform === 'AMD') {
+                options = ["Ryzen 5 5600 (AM4)", "Ryzen 7 5700X3D (AM4)", "Ryzen 5 7600X (AM5)", "Ryzen 7 7800X3D (AM5)", "Ryzen 9 7950X3D", "Ryzen 5 9600X (New)", "Ryzen 7 9700X (New)", "Ryzen 9 9950X (New)"];
             }
 
-            note = (rgbType === "full") ? "Daisy-chained fans selected for clean wiring." : "Stealth build focus.";
-            if (caseType === 'hyte') note += " Warning: Hyte Y70 takes ~138k of your budget!";
+            options.forEach(cpu => {
+                let opt = document.createElement('option');
+                opt.value = cpu;
+                opt.innerText = cpu;
+                list.appendChild(opt);
+            });
+        }
 
-            document.getElementById('build-list').innerHTML = `
-                <div class="p-4 bg-white/5 rounded-xl"><strong>CPU:</strong> ${cpu}</div>
-                <div class="p-4 bg-white/5 rounded-xl"><strong>GPU:</strong> ${gpu}</div>
-                <div class="p-4 bg-white/5 rounded-xl"><strong>Case:</strong> ${caseType.toUpperCase()}</div>
-            `;
-            document.getElementById('logic-note').innerHTML = note;
+        function populateGPUs() {
+            // Helper to fill select
+            const fill = (name, arr) => {
+                const el = document.querySelector(`select[name="${name}"]`);
+                if(el && arr) {
+                    arr.forEach(gpu => {
+                        let opt = document.createElement('option');
+                        opt.value = gpu.name;
+                        opt.innerText = `${gpu.name} (~${gpu.price})`;
+                        el.appendChild(opt);
+                    });
+                }
+            };
+            
+            if(pcData.nvidia) {
+                fill('GPU_Choice_20', pcData.nvidia.series20);
+                fill('GPU_Choice_30', pcData.nvidia.series30);
+                fill('GPU_Choice_40', pcData.nvidia.series40);
+                fill('GPU_Choice_50', pcData.nvidia.series50);
+            }
+            if(pcData.amd) {
+                fill('GPU_Choice_6000', pcData.amd.series6000);
+                fill('GPU_Choice_7000', pcData.amd.series7000);
+                fill('GPU_Choice_8000', pcData.amd.series8000);
+                fill('GPU_Choice_9000', pcData.amd.series9000);
+            }
+        }
+
+        function showGPUSeries() {
+            const platform = document.getElementById('gpu-platform').value;
+            document.getElementById('nvidia-series').classList.add('hidden');
+            document.getElementById('amd-series').classList.add('hidden');
+
+            if (platform === 'NVIDIA') document.getElementById('nvidia-series').classList.remove('hidden');
+            if (platform === 'AMD') document.getElementById('amd-series').classList.remove('hidden');
+        }
+
+        function clearOthers(select) {
+            // When one dropdown is used, reset the others to empty
+            document.querySelectorAll('.gpu-select').forEach(s => {
+                if (s !== select) s.value = "";
+            });
+        }
+
+        function setIDK(id) {
+            // Logic for "I don't know"
+            let el = document.getElementById(id);
+            // Create a hidden input to send "I don't know" instead
+            let input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = el.name;
+            input.value = "User selected: I DON'T KNOW";
+            el.parentNode.appendChild(input);
+            el.classList.add('hidden');
+            alert("Okay! We will choose the best option based on your budget.");
         }
     </script>
 </body>
